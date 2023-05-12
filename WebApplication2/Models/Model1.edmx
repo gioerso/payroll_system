@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище kursach_pm2Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "kursach_pm2.dbo.accurals" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="accurals">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="sum" Type="money" />
+          <Property Name="date" Type="date" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "kursach_pm2.dbo.awards" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="awards">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="month" Type="int" />
+          <Property Name="awardPercent" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6013: Первичный ключ в таблице или представлении "kursach_pm2.dbo.baseSalary" не определен, его не удалось вывести. Эта таблица или представление исключены. Чтобы использовать сущность, необходимо проверить схему, добавить правильные ключи и раскомментировать ее.
+        <EntityType Name="baseSalary">
+          <Property Name="userID" Type="int" />
+          <Property Name="type" Type="int" />
+          <Property Name="sum" Type="int" />
+        </EntityType>-->
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "kursach_pm2.dbo.paynamentMethods" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="paynamentMethods">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="BIK" Type="int" />
+          <Property Name="INN" Type="int" />
+          <Property Name="korr" Type="int" />
+          <Property Name="AccNum" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "kursach_pm2.dbo.timetable" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="timetable">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userID" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="workhours" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="date" Type="date" Nullable="false" />
+          <Property Name="workhours" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fio" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="role" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="img" Type="image" />
+        </EntityType>
+        <Association Name="FK_accurals_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="accurals" Type="Self.accurals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accurals">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_awards_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="awards" Type="Self.awards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="awards">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Ошибки, обнаруженные при создании:
+ошибка 6004: Невозможно найти таблицу "kursach_pm2.dbo.baseSalary", на которую ссылается связь.
+        <Association Name="FK_baseSalary_users" />-->
+        <Association Name="FK_paynamentMethods_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="paynamentMethods" Type="Self.paynamentMethods" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="paynamentMethods">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="timetable" Type="Self.timetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="timetable">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="varchar" Mode="In" />
+          <Parameter Name="password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Хранилище kursach_pm2ModelContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="accurals" EntityType="Self.accurals" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [accurals].[id] AS [id], 
+    [accurals].[userID] AS [userID], 
+    [accurals].[sum] AS [sum], 
+    [accurals].[date] AS [date]
+    FROM [dbo].[accurals] AS [accurals]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="awards" EntityType="Self.awards" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [awards].[ID] AS [ID], 
+    [awards].[userID] AS [userID], 
+    [awards].[month] AS [month], 
+    [awards].[awardPercent] AS [awardPercent]
+    FROM [dbo].[awards] AS [awards]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="paynamentMethods" EntityType="Self.paynamentMethods" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [paynamentMethods].[userID] AS [userID], 
+    [paynamentMethods].[BIK] AS [BIK], 
+    [paynamentMethods].[INN] AS [INN], 
+    [paynamentMethods].[korr] AS [korr], 
+    [paynamentMethods].[AccNum] AS [AccNum]
+    FROM [dbo].[paynamentMethods] AS [paynamentMethods]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="timetable" EntityType="Self.timetable" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [timetable].[id] AS [id], 
+    [timetable].[userID] AS [userID], 
+    [timetable].[date] AS [date], 
+    [timetable].[workhours] AS [workhours]
+    FROM [dbo].[timetable] AS [timetable]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_accurals_users" Association="Self.FK_accurals_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="accurals" EntitySet="accurals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_awards_users" Association="Self.FK_awards_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="awards" EntitySet="awards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paynamentMethods_users" Association="Self.FK_paynamentMethods_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="paynamentMethods" EntitySet="paynamentMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_users" Association="Self.FK_timetable_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="timetable" EntitySet="timetable" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="kursach_pm2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fio" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="img" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="accurals" Relationship="Self.FK_accurals_users" FromRole="users" ToRole="accurals" />
+          <NavigationProperty Name="awards" Relationship="Self.FK_awards_users" FromRole="users" ToRole="awards" />
+          <NavigationProperty Name="paynamentMethods" Relationship="Self.FK_paynamentMethods_users" FromRole="users" ToRole="paynamentMethods" />
+          <NavigationProperty Name="timetable" Relationship="Self.FK_timetable_users" FromRole="users" ToRole="timetable" />
+        </EntityType>
+        <EntityType Name="accurals">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="sum" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="users" Relationship="Self.FK_accurals_users" FromRole="accurals" ToRole="users" />
+        </EntityType>
+        <EntityType Name="awards">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="awardPercent" Type="Int32" />
+          <NavigationProperty Name="users" Relationship="Self.FK_awards_users" FromRole="awards" ToRole="users" />
+        </EntityType>
+        <EntityType Name="paynamentMethods">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="BIK" Type="Int32" />
+          <Property Name="INN" Type="Int32" />
+          <Property Name="korr" Type="Int32" />
+          <Property Name="AccNum" Type="Int32" />
+          <NavigationProperty Name="users" Relationship="Self.FK_paynamentMethods_users" FromRole="paynamentMethods" ToRole="users" />
+        </EntityType>
+        <EntityType Name="timetable">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="userID" />
+            <PropertyRef Name="date" />
+            <PropertyRef Name="workhours" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="workhours" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="Self.FK_timetable_users" FromRole="timetable" ToRole="users" />
+        </EntityType>
+        <Association Name="FK_accurals_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="accurals" Type="Self.accurals" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accurals">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_awards_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="awards" Type="Self.awards" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="awards">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_paynamentMethods_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="paynamentMethods" Type="Self.paynamentMethods" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="paynamentMethods">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_timetable_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="timetable" Type="Self.timetable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="timetable">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="kursach_pm2Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="accurals" EntityType="Self.accurals" />
+          <EntitySet Name="awards" EntityType="Self.awards" />
+          <EntitySet Name="paynamentMethods" EntityType="Self.paynamentMethods" />
+          <EntitySet Name="timetable" EntityType="Self.timetable" />
+          <AssociationSet Name="FK_accurals_users" Association="Self.FK_accurals_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="accurals" EntitySet="accurals" />
+          </AssociationSet>
+          <AssociationSet Name="FK_awards_users" Association="Self.FK_awards_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="awards" EntitySet="awards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_paynamentMethods_users" Association="Self.FK_paynamentMethods_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="paynamentMethods" EntitySet="paynamentMethods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_timetable_users" Association="Self.FK_timetable_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="timetable" EntitySet="timetable" />
+          </AssociationSet>
+          <FunctionImport Name="LoginByUsernamePassword" ReturnType="Collection(kursach_pm2Model.LoginByUsernamePassword_Result)">
+            <Parameter Name="username" Mode="In" Type="String" />
+            <Parameter Name="password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(kursach_pm2Model.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(kursach_pm2Model.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="LoginByUsernamePassword_Result">
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище kursach_pm2ModelContainer" CdmEntityContainer="kursach_pm2Entities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="kursach_pm2Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="kursach_pm2Model.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="fio" ColumnName="fio" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="role" ColumnName="role" />
+                <ScalarProperty Name="img" ColumnName="img" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="accurals">
+            <EntityTypeMapping TypeName="kursach_pm2Model.accurals">
+              <MappingFragment StoreEntitySet="accurals">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="sum" ColumnName="sum" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="awards">
+            <EntityTypeMapping TypeName="kursach_pm2Model.awards">
+              <MappingFragment StoreEntitySet="awards">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="awardPercent" ColumnName="awardPercent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="paynamentMethods">
+            <EntityTypeMapping TypeName="kursach_pm2Model.paynamentMethods">
+              <MappingFragment StoreEntitySet="paynamentMethods">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="BIK" ColumnName="BIK" />
+                <ScalarProperty Name="INN" ColumnName="INN" />
+                <ScalarProperty Name="korr" ColumnName="korr" />
+                <ScalarProperty Name="AccNum" ColumnName="AccNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="timetable">
+            <EntityTypeMapping TypeName="kursach_pm2Model.timetable">
+              <MappingFragment StoreEntitySet="timetable">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="workhours" ColumnName="workhours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="LoginByUsernamePassword" FunctionName="Хранилище kursach_pm2Model.LoginByUsernamePassword">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kursach_pm2Model.LoginByUsernamePassword_Result">
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Хранилище kursach_pm2Model.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Хранилище kursach_pm2Model.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Хранилище kursach_pm2Model.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Хранилище kursach_pm2Model.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kursach_pm2Model.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Хранилище kursach_pm2Model.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="kursach_pm2Model.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище kursach_pm2Model.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище kursach_pm2Model.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

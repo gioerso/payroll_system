@@ -1,0 +1,46 @@
+﻿@model IEnumerable<WebApplication2.Models.awards>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>Месяц</p>
+        </th>
+        <th>
+            <p>Процент премии</p>
+        </th>
+        <th>
+            <p>Пользователь</p>
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.month)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.awardPercent)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.users.fio)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

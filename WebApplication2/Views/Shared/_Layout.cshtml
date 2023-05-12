@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <style>
+        body {
+            background: whitesmoke;
+            background-size: cover;
+        }
+
+        * {
+            color: black;
+            font-family: 'Segoe UI Variable Text', monospace;
+        }
+
+        .navbar-inverse .navbar-brand {
+            color: whitesmoke;
+        }
+
+        .btn-default {
+            color: whitesmoke;
+            background-color: forestgreen;
+            border-color: forestgreen;
+        }
+        .navbar-inverse .navbar-nav > li > a {
+            color: whitesmoke;
+        }
+        .navbar-inverse {
+            background-color: forestgreen;
+            border-color: #080808;
+            background-blend-mode: multiply;
+        }
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #228b22;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Система начисления зарплат", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    @*@if (User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Главная", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Пользователи", "Index", "Users")</li>
+                        }*@
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - ООО "Системы начисления зарплат</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

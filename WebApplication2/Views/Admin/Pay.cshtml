@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Выплата зарплаты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: forestgreen;
+        border-color: forestgreen;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+    * {
+        color: whitesmoke;
+        font-family: 'Segoe UI Variable Text', monospace;
+    }
+    .textbox{
+        color: #000000;
+    }
+</style>
+
+<h2>Выплатить зарплату</h2>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <table class="table">
+            <tr>
+                <th>
+                    Ручная выплата
+                </th>
+                <th>
+                    Автоматическая выплата
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <form method="post" action="/Admin/Pay">
+                        <table>
+                            <tr>
+                                <td><p>Введите ID пользователя: </p></td>
+                                <td><input type="text" name="Id" class="textbox"/> </td>
+                            </tr>
+                            <tr>
+                                <td><p>Введите сумму: </p></td>
+                                <td><input type="text" name="Sum" class="textbox"/> </td>
+                            </tr>
+                            <tr>
+                                <td><p>Введите дату: </p></td>
+                                <td><input type="date" name="Date" class="textbox"/> </td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Отправить" class="btn-primary btn-lg"/> </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </form>
+                </th>
+                <th>
+                    <form method="post" action="/Admin/Pay">
+                        <table>
+                            <tr>
+                                <td><p>Введите дату: </p></td>
+                                <td><input type="date" name="Date" class="textbox" /> </td>
+                            </tr>
+                            <tr>
+                                <td><input type="submit" value="Зачислить автоматически" class="btn-primary btn-lg" /> </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </form>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>

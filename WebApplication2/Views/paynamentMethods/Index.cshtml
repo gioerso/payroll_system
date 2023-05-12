@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication2.Models.paynamentMethods>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>БИК</p>
+        </th>
+        <th>
+            <p>ИНН</p>
+        </th>
+        <th>
+            <p>Корреспондентский счет банка</p>
+        </th>
+        <th>
+            <p>Номер счета сотрудника</p>
+        </th>
+        <th>
+            <p>ФИО сотрудника</p>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BIK)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.INN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.korr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.users.login)
+        </td>
+    </tr>
+}
+
+</table>

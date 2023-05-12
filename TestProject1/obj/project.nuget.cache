@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "pwkMpRNmicbQY+4jD9wJTinxb9m+2TbvTiusGBZ/jCLBTfcLojBBhfWaA5nBWxVMwfpGuHrnnSpF+26qtt9E+Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Billy Herrington\\Desktop\\Учёба\\МДК0201_ТРПО\\WebApplication2\\TestProject1\\TestProject1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Billy Herrington\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
+    "C:\\Users\\Billy Herrington\\.nuget\\packages\\microsoft.net.test.sdk\\16.5.0\\microsoft.net.test.sdk.16.5.0.nupkg.sha512",
+    "C:\\Users\\Billy Herrington\\.nuget\\packages\\nunit\\3.12.0\\nunit.3.12.0.nupkg.sha512",
+    "C:\\Users\\Billy Herrington\\.nuget\\packages\\nunit3testadapter\\3.16.1\\nunit3testadapter.3.16.1.nupkg.sha512"
+  ],
+  "logs": []
+}

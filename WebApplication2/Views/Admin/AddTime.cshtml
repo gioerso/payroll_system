@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Добавление отработанного времени";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: forestgreen;
+        border-color: forestgreen;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+
+    * {
+        color: black;
+        font-family: 'Segoe UI Variable Text', monospace;
+    }
+
+    .textbox {
+        color: #000000;
+    }
+</style>
+
+<h2>Добавление отработанного времени</h2>
+
+<form method="post" action="/Admin/AddTime">
+    <table>
+        <tr>
+            <td><p>Введите дату: </p></td>
+            <td><input type="date" name="Date" class="textbox" /> </td>
+        </tr>
+        <tr>
+            <td><p>Введите отработанное время: </p></td>
+            <td><input type="text" name="Time" class="textbox" /> </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Отправить" class="btn-primary btn-lg" /> </td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+

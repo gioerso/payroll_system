@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "Назначение премий";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: forestgreen;
+        border-color: forestgreen;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+
+    * {
+        color: whitesmoke;
+        font-family: 'Segoe UI Variable Text', monospace;
+    }
+
+    .textbox {
+        color: #000000;
+    }
+</style>
+
+<h2>Назначение премий</h2>
+
+<form method="post" action="/Admin/SetAward">
+    <table>
+        <tr>
+            <td><p>Введите ID пользователя: </p></td>
+            <td><input type="text" name="userID" class="textbox" /> </td>
+        </tr>
+        <tr>
+            <td><p>Введите месяц назначение (номер месяца): </p></td>
+            <td><input type="text" name="month" class="textbox" /> </td>
+        </tr>
+        <tr>
+            <td><p>Введите процент премии: </p></td>
+            <td>
+                <select class="textbox" name="percent">
+                    <option disabled>Выберите</option>
+                    <option value="30">30</option>
+                    <option selected value="15">15</option>
+                    <option value="10">10</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Отправить" class="btn-primary btn-lg" /> </td>
+            <td></td>
+        </tr>
+    </table>
+</form>
+

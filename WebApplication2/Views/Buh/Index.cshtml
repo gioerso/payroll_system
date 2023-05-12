@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <h2>Бухгалтер: главная страница</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    Пользовательская часть
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <p><a href="/Admin/Pay" class="btn btn-primary btn-lg">Выплатить зарплату</a></p>
+                    <p><a href="/Admin/GetMeAccurals" class="btn btn-primary btn-lg">Получить отчет по зарплате</a></p>
+                    <p><a href="/Admin/SetAward" class="btn btn-primary btn-lg">Назначить премию</a></p>
+                    <p><a href="/Admin/AddTime" class="btn btn-primary btn-lg">Внести информацию об отработанном времени</a></p>
+
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+

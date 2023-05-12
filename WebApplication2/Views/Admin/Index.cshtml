@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .btn-primary {
+        color: #fff;
+        background-color: forestgreen;
+        border-color: forestgreen;
+        padding: 10px 20px;
+        margin: 5px;
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-md-3 col-sm-6">
+        <h2>Администратор: главная страница</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    Административная часть
+                </th>
+                <th>
+                    Пользовательская часть
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <p><a href="/Users/Index" class="btn btn-primary btn-lg">Пользователи</a></p>
+                    <p><a href="/accurals/Index" class="btn btn-primary btn-lg">Выплатаченные зарплаты</a></p>
+                    <p><a href="/timetables/Index" class="btn btn-primary btn-lg">Таблица отработанного времени</a></p>
+                    <p><a href="/paynamentMethods/Index" class="btn btn-primary btn-lg">Платежные данные</a></p>
+                    <p><a href="/awards/Index" class="btn btn-primary btn-lg">Премии</a></p>
+                </th>
+                <th>
+                    <p><a href="/Admin/Pay" class="btn btn-primary btn-lg">Выплатить зарплату</a></p>
+                    <p><a href="/Admin/GetMeAccurals" class="btn btn-primary btn-lg">Получить отчет по зарплате</a></p>
+                    <p><a href="/Admin/SetAward" class="btn btn-primary btn-lg">Назначить премию</a></p>
+                    <p><a href="/Admin/AddTime" class="btn btn-primary btn-lg">Внести информацию об отработанном времени</a></p>
+
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication2.Models.timetable>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <p>Пользователь</p>
+        </th>
+        <th>
+            <p>Отработанные часы</p>
+        </th>
+        <th>
+            <p>Дата</p>
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.users.fio)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.workhours)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.date)
+    </td>
+</tr>
+}
+
+</table>
